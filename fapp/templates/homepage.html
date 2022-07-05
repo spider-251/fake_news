@@ -1,0 +1,435 @@
+<html>
+  <head>
+    <title>Fakes News Detector</title>
+  </head>
+  <!-- <Header Style > -->
+  <style>
+    body{
+      background-color: #f0ede5;
+    }
+    .heading {
+      color: rgb(247, 247, 247);
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1.75rem;
+      padding-left: 10%;
+      padding-top: 1rem;
+    }
+    .font-small {
+      font-weight: 400;
+      font-size: 1rem;
+      padding: 1mm;
+    }
+    .head-box {
+      margin: 0px -8px;
+      border: solid #104d9c;
+      margin-bottom: 25;
+      background-color: #104d9c;
+      margin-top: -8px;
+      padding-bottom: 10px;
+    }
+    img {
+      display: block;
+      float: left;
+      height: auto;
+      width: auto;
+      height: 100px;
+      margin: 15px 10px 10px 25px;
+    }
+  </style>
+  <!-- <Input Style > -->
+  <style>
+    .sub {
+      font-size: 20px;
+      color: rgb(44, 44, 44);
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    }
+    .error-message {
+      font-size: 15px;
+      color: rgb(233, 81, 43);
+      padding-left: 1%;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    }
+    .main {
+      font-size: large;
+      color: rgb(5, 12, 36);
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      background-color: #f6f6f6;
+      padding-bottom: 50px;
+      border-left: 6px solid #0048ce;
+      padding-top: 12px;
+      padding-left: 3%;
+      border-radius: 1mm;
+      margin-top: 8mm;
+      margin-bottom: 8mm;
+      margin-left: 2mm;
+      margin-right: 10mm;
+    }
+    .btn {
+      background-color: #0050e4;
+      border-radius: 5px;
+      border-color: #0048ce;
+      font-size: 17px;
+      font-weight: 600;
+      font-family: "Source Sans Pro", sans-serif;
+      padding: 6px 20px;
+      margin-top: 10px;
+      margin-left: 25px;
+    }
+    .btn:hover {
+      color: #ffffff;
+    }
+    .box-outlay {
+      padding: 8px 20px;
+      padding-bottom: 16px;
+      margin: 20px;
+      box-shadow: none;
+      background-color: rgb(226, 226, 226);
+      border-radius: 2mm;
+      width: 60%;
+    }
+    .form-control {
+      border-radius: 2mm;
+      border-width: 1mm;
+      border-color: rgb(58, 58, 58);
+      padding: 10px;
+      width: 80%;
+      height: 125px;
+      margin-left: 15px;
+      margin-top: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+
+  <body>
+    {% load static %}
+    <div>
+      <div class="head-box">
+        <span>
+          <a href="{% url 'fapp:homepage' %}">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/5228/5228930.png"
+              title="Go to Home Page"
+          /></a>
+        </span>
+        <p class="heading">
+          Fake News Detection<br />
+          <!-- <sub class="font-small"
+            >Pfactorial pvt.ltd</sub
+          > -->
+        </p>
+      </div>
+    </div>
+    {% if submitted == 5 %}
+    <span style="float: right">
+    <table width:50% border:1>
+      <thead>
+        <tr>
+          <th bgcolor="#104d9c" width="300">News</th>
+          <th bgcolor="#104d9c">Validity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="10">
+        <div class="scrollit">
+          <table>
+            {% for b in df.itertuples %}
+            <tr>
+              
+              <td>
+                <button class="class" onclick="myFunction()">
+                <textarea class="class" id={{b.index}} style="height: 65px; width: 300px">{{b.text}}</textarea>
+                </button>
+              </td>
+              <td>{{b.val}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </span>
+  {% endif %}
+  <script>
+    function myFunction(){
+        document.getElementById("newskey3").value = document.getElementById("8").value;
+      }
+  </script>
+  {% if submitted == 5 %}
+    <div class="box-outlay">
+        {% if submitted == 5 %}
+        <div><span class="sub">Enter the news to validate</span></div>
+        {% endif %}
+        <br />
+        <form class="main" action="" method="post" id="my_form">
+          {{news}}
+          {% csrf_token %}
+          {% if submitted == 5 %}
+          <textarea
+            class="form-control"
+            type="text"
+            name="news"
+            placeholder="Search News"
+            id="newskey3"
+            required="required"
+          >{% if submitted == 5 %}{{news}}{% endif %}</textarea>
+          {% endif %}
+          <br />
+          {% if submitted == 5 %}
+          <input class="btn" type="submit" value="Submit" id="submit" />
+          
+          {% endif %}
+    
+        </form>
+      </div>
+  {% endif %}
+      <style>
+        .main-2 {
+        font-size: large;
+        color: rgb(5, 12, 36);
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        background-color: #f6f6f6;
+        padding-bottom: 50px;
+        border-left: 6px solid #0048ce;
+        padding-top: 20px;
+        padding-left: 1.5%;
+        padding-right: 1.5%;
+        border-radius: 1mm;
+        margin-top: 8mm;
+        margin-bottom: 8mm;
+        margin-left: 2mm;
+        margin-right: 10mm;
+        height: 35%;
+        }
+        .box-outlay-2 {
+          padding: 8px 8px;
+          padding-bottom: 16px;
+          margin: 20px;
+          box-shadow: none;
+          background-color: rgb(226, 226, 226);
+          border-radius: 2mm;
+          width: 95%;
+          height: 65%;
+        }
+        .form-control-2 {
+          border-radius: 2mm;
+          border-width: 1mm;
+          border-color: rgb(58, 58, 58);
+          padding-top: -10px;
+          width: 95%;
+          height: 70%;
+          margin-left: 15px;
+          margin-top: 30px;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .wrapper {
+          font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Helvetica",
+            sans-serif;
+          margin-left: 180px;
+          margin-right: auto;
+          margin-top: 40px;
+        }
+
+		    .loader {
+			    width: 60%;
+		    	margin: 25px auto 10px;
+          border-radius: 3mm;
+		    	position: relative;
+          background: #fff;
+		    }
+
+		    .loader .loading_1 {
+			    position: relative;
+			    width: 100%;
+
+			    height: 35px;
+			    border: 1px solid #fff;
+			    border-radius: 3mm;
+		    }
+        .loader .loading_2 {
+			    position: relative;
+			    width: 100%;
+			    height: 35px;
+			    border: 1px solid #fff;
+			    border-radius: 10px;
+        }
+
+		    .loader .loading_1:before {
+			    content: "";
+			    display: block;
+			    position: relative;
+			    width: {{lg_prob}}%;
+			    height: 100%;
+			    background-color: #15c942;
+			    box-shadow: 10px 0px 15px 0px yellowgreen;
+			    animation: load 1s;
+		    }
+
+        .loader .loading_2:before {
+			    content: "";
+			    display: block;
+			    position: relative;
+			    width: {{fk_prob}}%;
+			    height: 100%;
+			    background-color: #db1d2d;
+			    box-shadow: 10px 0px 15px 0px rgb(224, 30, 30);
+			    animation: load 1s;
+		    }
+
+
+        
+		    @keyframes load {
+			    0% {
+				    width: 0%;
+			    }
+
+			    0% {
+				    width: 0%;
+			    }
+	    	}
+        
+        .percentage-bar {
+          background: #fff;
+          display: block;
+          height: 40px;
+          border-radius: 3mm;
+          margin-bottom: 15px;
+          position: absolute;
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .title {
+          color: #090909;
+          font-size: 16px;
+          left: -115;
+          position: absolute;
+          top: 0;
+          width: 120px;
+        }
+
+        .title2 {
+          color: #090909;
+          font-size: 16px;
+          left: -115;
+          position: absolute;
+          top: 0;
+          width: 120px;
+        }
+      
+        .title span {
+          background-color: #149234;
+          display: block;
+          border-radius: 4px;
+          height: 36px;
+          line-height: 35px;
+          padding: 0 20px;
+          text-align: center;
+        }
+
+        .title2 span {
+          background-color: #b11e2a;
+          display: block;
+          border-radius: 4px;
+          height: 36px;
+          line-height: 35px;
+          padding: 0 20px;
+          text-align: center;
+        }
+
+        .bar {
+          height: 35px;
+          width: 0px;
+        }
+        
+        .percent {
+          color: #ffffff;
+          color: rgba(0, 0, 0, 0.4);
+          font-size: 20px;
+          height: 10px;
+          line-height: 37px;
+          position: absolute;
+          right: 10px;
+          top: 0;
+        }
+          
+        section.percentage-bar div.title {
+          background: #15c942;
+        }
+        section.percentage-bar:first-child div.bar {
+          background: #17af3d;
+        }
+
+        section.percentage-bar:nth-child(2) div.title {
+          background: #b11e2a;
+        }
+        section.percentage-bar:nth-child(2) div.bar {
+          background: #db1d2d;
+        }
+      </style>
+      <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          margin-right: 35px;
+          margin-top: 2px;
+          border-radius: 10mm;
+        }
+
+        td,
+        th {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 8px;
+        }
+
+        tr{
+          background-color: #dddddd;
+        }
+        .scrollit{
+          overflow-y:scroll;
+          height: 333px;
+        }
+        .suggest{
+          font-size: 14px;
+          text-align: center;
+        }
+        .try_again{
+          margin-left: 80px;
+          margin-right: 80px;
+        }
+        
+      </style>
+
+      {% if submitted == 1 %}
+      <div class="box-outlay-2">
+        <div class="form-control-2">
+          <form class="main-2" action="" method="post" id="my_form">
+            {{news}}
+          </form>
+          <div class="wrapper">
+            <section class="loader" data-percent="100%">
+              <div class="loading_1"></div>
+              <div class="title"><span>LEGIT</span></div>
+              <div class="percent"><strong>{{lg_prob}}%</strong></div>
+            </section>
+            <section class="loader" data-percent="100%">
+              <div class="loading_2"></div>
+              <div class="percent"><strong>{{fk_prob}}%</strong></div>
+              <div class="title2"><span>FAKE</span></div>
+            </section>
+            <div class="suggest">
+            <p>If the fake news probability is above 50%, it can be considered as fake news</p></div>
+          </div>
+          <div class="try_again">
+          <a href="{% url 'fapp:homepage' %}">
+            <button class="btn">Try Again</button>
+          </a> </div>
+        </div>
+      </div>
+      {% endif %}
+  </body>
+</html>
